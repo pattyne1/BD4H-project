@@ -75,4 +75,4 @@ python main.py --observation_window 12 --epochs 30 --batch-size 128
 ### Directory Structure
 - `data_synthetic/`: Generated synthetic data
 - `checkpoints/`: Saved models
-- `main.py`: Main code file
+- `project_code.py`: Main code file

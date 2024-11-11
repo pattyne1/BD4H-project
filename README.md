@@ -1,8 +1,16 @@
-# BD4H-project
+# Estimating Individual Treatment Effects with Time-Varying Confounders
+This repository contains code to reproduce the results from the paper "Estimating Individual Treatment Effects with Time-Varying Confounders" by Ruoqi Liu, Changchang Yin, and Ping Zhang for the synthetic dataset experiments.
 
-project code.ipynb contains code for reproducing the results in Estimating Individual Treatment Effects with Time-Varying Confounders (Ruoqi Liu, Changchang Yin, Ping Zhangsynthetic) for the synthetic dataset. 
+## Dependencies
+The code requires the following Python packages:
+- PyTorch
+- NumPy
+Pandas
+Scikit-learn
+tqdm
+Matplotlib
 
-1. Dependencies
+You can install the required packages using pip:
 2. Accessing the Data
 3. Functionality of scripts 
 4. Instructions to run the code

@@ -471,7 +471,7 @@ import os
 from sklearn.metrics import mean_squared_error
 
 HIDDEN_SIZE = 32
-CUDA = True
+CUDA = False
 
 
 def trainInitIPTW(train_loader, val_loader,test_loader, model, epochs, optimizer, criterion,

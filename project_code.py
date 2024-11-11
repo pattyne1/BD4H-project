@@ -638,7 +638,7 @@ def transfer_data(model, dataloader, criterion, eval_use_cuda=False):
             else:
                 for i in range(len(ipw_outputs)):
                     ipw_outputs[i]=ipw_outputs[i].detach().data.numpy()
-                ipw_outputs = ipw_outputs.detach().data.numpy()
+                ipw_outputs = ipw_outputs.detach().data.numpy() 
                 x_fr_inputs = x_fr_inputs.detach().data.numpy()
                 targets = targets.detach().data.numpy()
                 outcome_outputs = outcome_outputs.detach().data.numpy()
@@ -730,13 +730,10 @@ if __name__ == '__main__':
     # args = parser.parse_args()
     args = parser.parse_args(['--observation_window', '12', '--epochs', '30', '--batch-size', '128'])
 
-    # Settings
-    if CUDA:
-        torch.cuda.set_device(args.cuda_device)
-
-    print("batch size ==> ", args.batch_size )
-    print("lr ==> ", args.lr)
-    print("observation window == >", args.observation_window)
+    print("Settings:")
+    print(f"Batch size: {args.batch_size}")
+    print(f"Learning rate: {args.lr}")
+    print(f"Observation window: {args.observation_window}")
     torch.manual_seed(666)
 
     try:
@@ -754,41 +751,29 @@ if __name__ == '__main__':
     val_dataset = SyntheticDataset(val_iids, args.observation_window, treatment_option)
     test_dataset = SyntheticDataset(test_iids, args.observation_window, treatment_option)
 
-    # DataLoaders
-    train_loader = torch.utils.data.DataLoader(train_dataset, args.batch_size, shuffle=True, generator=torch.Generator(device='cuda'))
-    val_loader = torch.utils.data.DataLoader(val_dataset, args.batch_size, shuffle=True, generator=torch.Generator(device='cuda'))
-    test_loader = torch.utils.data.DataLoader(test_dataset, args.batch_size, shuffle=True, generator=torch.Generator(device='cuda'))
-
+    # DataLoaders - removed CUDA generator
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, shuffle=True)
     n_X_features, n_X_static_features, n_X_fr_types, n_classes = get_dim()
     # ---------------------------------------- #
-    # Model
+    
+    # Initialize model
+    attn_model = 'concat2'
+    n_Z_confounders = HIDDEN_SIZE
 
-    if args.resume:
-        if os.path.isfile(args.resume):
-            try:
-                print(f"=> loading checkpoint '{args.resume}'")
-                model = torch.load(args.resume)
-                model = model.cuda()
-                print(f"=> loaded checkpoint '{args.resume}'")
-            except Exception as e:
-                print(f"Error loading checkpoint: {e}")
-                raise
-        else:
-            print(f"=> no checkpoint found at '{args.resume}'")
-    else:
+    model = LSTMModel(n_X_features, n_X_static_features, n_X_fr_types, n_Z_confounders,
+                     attn_model, n_classes, args.observation_window,
+                     args.batch_size, hidden_size=HIDDEN_SIZE)
 
-        attn_model = 'concat2'
-        n_Z_confounders = HIDDEN_SIZE
+    # Initialize optimizer
+    optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
-        model = LSTMModel(n_X_features, n_X_static_features, n_X_fr_types, n_Z_confounders,
-                 attn_model, n_classes, args.observation_window,
-                          args.batch_size, hidden_size = HIDDEN_SIZE)
-
-    adam_optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-
-    trainInitIPTW(train_loader, val_loader,test_loader,
-                  model, epochs= args.epochs,
-                  criterion=F.binary_cross_entropy_with_logits, optimizer=adam_optimizer,
+    # Train model
+    trainInitIPTW(train_loader, val_loader, test_loader,
+                  model, epochs=args.epochs,
+                  criterion=F.binary_cross_entropy_with_logits,
+                  optimizer=optimizer,
                   l1_reg_coef=args.l1,
-                  use_cuda=CUDA,
+                  use_cuda=False,
                   save_model=args.save_model)

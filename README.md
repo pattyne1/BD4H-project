@@ -51,7 +51,6 @@ The code consists of several key components:
 
 ## Instructions to run the code
 
-### Setup
 1. Clone the repository:
 ```bash
 git clone [repository-url]

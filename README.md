@@ -51,3 +51,13 @@ The code consists of several key components:
 - Provides model performance analysis
 
 ## Instructions to run the code
+
+### Setup
+1. Clone the repository
+2. Install requirements: `pip install -r requirements.txt`
+3. Run the code: `python main.py --observation_window 12 --epochs 30 --batch-size 128`
+
+### Directory Structure
+- `data_synthetic/`: Generated synthetic data
+- `checkpoints/`: Saved models
+- `main.py`: Main code file

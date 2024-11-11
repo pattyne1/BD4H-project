@@ -69,7 +69,7 @@ pip install torch numpy pandas scikit-learn tqdm
 4. Run the code:
 
 ``` bash
-python main.py --observation_window 12 --epochs 30 --batch-size 128
+python project_code.py --observation_window 12 --epochs 30 --batch-size 128
 ```
 
 ### Directory Structure

@@ -71,8 +71,12 @@ pip install torch numpy pandas scikit-learn tqdm
 ``` bash
 python project_code.py --observation_window 12 --epochs 30 --batch-size 128
 ```
+5. Suggestions / Our approach
+We completed this process on relatively weak laptops and so had to run this code on the cloud via google drive. It is as simple as downloading the file to your, mounting google drive, and changing necessary paths throughout. 
 
 ### Directory Structure
 - `data_synthetic/`: Generated synthetic data
 - `checkpoints/`: Saved models
 - `project_code.py`: Main code file
+
+  

@@ -8,7 +8,6 @@ The code requires the following Python packages:
 - Pandas
 - Scikit-learn
 - tqdm
-- Matplotlib
 
 You can install the required packages using pip. 
 
@@ -53,8 +52,17 @@ The code consists of several key components:
 ## Instructions to run the code
 
 ### Setup
-1. Clone the repository
-2. Install requirements: `pip install -r requirements.txt`
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd [repository-name]
+```
+2. Create active virtual enviroment (reccomended):
+`# using conda 
+conda create -n treatment_effects python=3.8
+conda activate treatment_effects
+`
+2. Install requirements: `pip install torch numpy pandas scikit-learn tqdm`
 3. Run the code: `python main.py --observation_window 12 --epochs 30 --batch-size 128`
 
 ### Directory Structure

@@ -5,12 +5,16 @@ This repository contains code to reproduce the results from the paper "Estimatin
 The code requires the following Python packages:
 - PyTorch
 - NumPy
-Pandas
-Scikit-learn
-tqdm
-Matplotlib
+- Pandas
+- Scikit-learn
+- tqdm
+- Matplotlib
 
-You can install the required packages using pip:
+You can install the required packages using pip: pip install torch numpy pandas sklearn tqdm matplotlib
+
+
+
+
 2. Accessing the Data
 3. Functionality of scripts 
 4. Instructions to run the code

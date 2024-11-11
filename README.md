@@ -58,12 +58,20 @@ git clone [repository-url]
 cd [repository-name]
 ```
 2. Create active virtual enviroment (reccomended):
-`# using conda 
+``` bash
 conda create -n treatment_effects python=3.8
 conda activate treatment_effects
-`
-2. Install requirements: `pip install torch numpy pandas scikit-learn tqdm`
-3. Run the code: `python main.py --observation_window 12 --epochs 30 --batch-size 128`
+```
+
+2. Install requirements: 
+```bash
+pip install torch numpy pandas scikit-learn tqdm
+```
+4. Run the code:
+
+``` bash
+python main.py --observation_window 12 --epochs 30 --batch-size 128
+```
 
 ### Directory Structure
 - `data_synthetic/`: Generated synthetic data

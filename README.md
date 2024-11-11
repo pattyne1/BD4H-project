@@ -10,11 +10,26 @@ The code requires the following Python packages:
 - tqdm
 - Matplotlib
 
-You can install the required packages using pip: pip install torch numpy pandas sklearn tqdm matplotlib
+You can install the required packages using pip. 
+
+## Accessing the Data
+The synthetic dataset is generated within the code using the following parameters:
+
+Timesteps (T): 30
+Number of covariates (k): 100
+Number of static features (k_s): 5
+Hidden dimension (h): 1
+Number of samples (N): 4000
+Number of treated samples (N_treated): 1000
+
+The data generation process follows the procedure described in the paper to simulate:
+
+Treatment assignments (A)
+Time-varying covariates (X)
+Static covariates (X_static)
+Hidden confounders (Z)
+Factual and counterfactual outcomes (Y)
 
 
-
-
-2. Accessing the Data
 3. Functionality of scripts 
 4. Instructions to run the code

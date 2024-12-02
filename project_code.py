@@ -704,31 +704,34 @@ if __name__ == '__main__':
     parser.add_argument('--observation_window', type=int, default=12, required=True,
                         metavar='OW', help='observation window')
 
-    parser.add_argument('--epochs', type=int, default=30, required=True,
+    parser.add_argument('--epochs', type=int, default=10, required=True,
                         metavar='EPOC', help='train epochs')
 
-    parser.add_argument('--batch-size', type=int, default=128,
+    parser.add_argument('--batch-size', type=int, default=64,
                         metavar='BS',help='batch size')
 
-    parser.add_argument('--lr', '--learning-rate', default=1e-3, type=float,
+    parser.add_argument('--lr', '--learning-rate', default=1e-4, type=float,
                         metavar='LR', help='initial learning rate')
 
-    parser.add_argument('--weight_decay', type=float, default=1e-5)
+    parser.add_argument('--weight_decay', type=float, default=1e-4)
 
-    parser.add_argument('--l1', '--l1-reg-coef', default=1e-5, type=float,
+    parser.add_argument('--l1', '--l1-reg-coef', default=1e-6, type=float,
                         metavar='L1', help='L1 reg coef')
 
-    parser.add_argument('--resume', default='', type=str, metavar='PATH', help='path to latest checkpoint (default: none)')
+    parser.add_argument('--resume', default=''.format(treatment_option), type=str, metavar='PATH',
+                        help='path to latest checkpoint (default: none)')
 
-    parser.add_argument('--save_model', default=os.path.join(CHECKPOINT_DIR, f'mimic-6-7-{gamma}.pt'), type=str, metavar='PATH', help='path to save new checkpoint (default: none)')
+    parser.add_argument('--save_model', default='checkpoints/mimic-6-7-{}.pt'.format(gamma), type=str, metavar='PATH',
+                        help='path to save new checkpoint (default: none)')
 
     parser.add_argument('--cuda-device', default=0, type=int, metavar='N',
                         help='which GPU to use')
 
-    parser.add_argument('--split_file', default=os.path.join(DATA_DIR, f'data_syn_{gamma}/train_test_split.csv'), type=str, metavar='PATH', help='path to train/test split file')
+    parser.add_argument('--split_file', default='data_synthetic/data_syn_{}/train_test_split.csv'.format(gamma), type=str, metavar='PATH',
+                        )
 
     # args = parser.parse_args()
-    args = parser.parse_args(['--observation_window', '12', '--epochs', '30', '--batch-size', '128'])
+    args = parser.parse_args(['--observation_window', '12', '--epochs', '10', '--batch-size', '64'])
 
     print("Settings:")
     print(f"Batch size: {args.batch_size}")
